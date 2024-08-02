@@ -20,6 +20,10 @@ const Max = (arr) => {
 };
 
 const secondMax = (arr) => {
+  if (arr.length < 2) {
+    throw new Error("Array must have at least two elements");
+  }
+
   let max = arr[0];
   let secondMax = arr[1];
 
@@ -28,21 +32,16 @@ const secondMax = (arr) => {
     [max, secondMax] = [secondMax, max];
   }
 
-  // loop
-
+  // loop through the array starting from the third element
   for (let i = 2; i < arr.length; i++) {
-    // if the new one is higher than the current max, shift the max to second, and replace the max one
-
     if (arr[i] > max) {
       secondMax = max;
       max = arr[i];
     } else if (arr[i] > secondMax && arr[i] !== max) {
       secondMax = arr[i];
+    } else if (arr[i] === max) {
+      secondMax = arr[i];
     }
-  }
-
-  if (max === secondMax) {
-    return max;
   }
 
   return secondMax;
